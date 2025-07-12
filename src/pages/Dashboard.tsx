@@ -102,20 +102,26 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
                 <Users className="w-5 h-5 text-white" />
               </div>
-              <Link to="/" className="text-xl font-bold text-gray-900">SkillSwap</Link>
+              <Link to="/" className="text-xl font-semibold text-slate-900">SkillSwap Platform</Link>
             </div>
             <div className="flex items-center space-x-4">
+              <Link to="/requests">
+                <Button variant="ghost" size="sm" className="text-slate-600 hover:text-slate-900">
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  Requests
+                </Button>
+              </Link>
               <Link to="/messages">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" className="text-slate-600 hover:text-slate-900">
                   <MessageCircle className="w-4 h-4 mr-2" />
                   Messages
                 </Button>
               </Link>
               <Link to="/profile">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" className="text-slate-600 hover:text-slate-900">
                   <User className="w-4 h-4 mr-2" />
                   Profile
                 </Button>
@@ -128,19 +134,19 @@ const Dashboard = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Discover Skills</h1>
-          <p className="text-gray-600">Find amazing people to learn from and share your expertise</p>
+          <h1 className="text-3xl font-semibold text-slate-900 mb-2">Discover Skills</h1>
+          <p className="text-slate-600">Find amazing people to learn from and share your expertise</p>
         </div>
 
         {/* Search and Filter */}
         <div className="mb-8 space-y-4">
           <div className="relative">
-            <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
             <Input
               placeholder="Search skills, topics, or people..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 py-3 text-lg"
+              className="pl-10 pr-4 py-3 text-lg border-slate-200 focus:border-slate-400"
             />
           </div>
 
@@ -151,6 +157,10 @@ const Dashboard = () => {
                 variant={selectedCategory === category ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedCategory(category)}
+                className={selectedCategory === category ? 
+                  "bg-slate-900 text-white hover:bg-slate-800" : 
+                  "border-slate-300 text-slate-600 hover:bg-slate-50"
+                }
               >
                 {category}
               </Button>
@@ -160,7 +170,7 @@ const Dashboard = () => {
 
         {/* Add Skill Button */}
         <div className="mb-6">
-          <Button className="w-full sm:w-auto">
+          <Button className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white">
             <Plus className="w-4 h-4 mr-2" />
             Share Your Skills
           </Button>
@@ -169,45 +179,49 @@ const Dashboard = () => {
         {/* Skills Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredSkills.map((skill) => (
-            <Card key={skill.id} className="hover:shadow-lg transition-shadow cursor-pointer">
+            <Card key={skill.id} className="hover:shadow-lg transition-shadow cursor-pointer border-slate-200">
               <CardHeader>
                 <div className="flex items-start justify-between mb-2">
-                  <Badge variant="secondary">{skill.category}</Badge>
+                  <Badge variant="secondary" className="bg-slate-100 text-slate-700 border-slate-300">
+                    {skill.category}
+                  </Badge>
                   <div className="flex items-center">
                     <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span className="text-sm text-gray-600 ml-1">
+                    <span className="text-sm text-slate-600 ml-1">
                       {skill.rating} ({skill.reviews})
                     </span>
                   </div>
                 </div>
-                <CardTitle className="text-lg">{skill.title}</CardTitle>
-                <CardDescription className="line-clamp-2">
+                <CardTitle className="text-lg text-slate-900">{skill.title}</CardTitle>
+                <CardDescription className="line-clamp-2 text-slate-600">
                   {skill.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                    <div className="w-8 h-8 bg-slate-600 rounded-full flex items-center justify-center text-white text-xs font-semibold">
                       {skill.userAvatar}
                     </div>
-                    <span className="text-sm text-gray-700">{skill.user}</span>
+                    <span className="text-sm text-slate-700">{skill.user}</span>
                   </div>
-                  <Badge variant="outline">{skill.level}</Badge>
+                  <Badge variant="outline" className="border-slate-300 text-slate-600">
+                    {skill.level}
+                  </Badge>
                 </div>
                 
-                <div className="text-sm text-gray-600 mb-4">
+                <div className="text-sm text-slate-600 mb-4">
                   <p>{skill.duration}</p>
                 </div>
 
                 <div className="flex space-x-2">
                   <Link to={`/skill/${skill.id}`} className="flex-1">
-                    <Button variant="outline" size="sm" className="w-full">
+                    <Button variant="outline" size="sm" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50">
                       View Details
                     </Button>
                   </Link>
-                  <Button size="sm" className="flex-1">
-                    Connect
+                  <Button size="sm" className="flex-1 bg-slate-900 hover:bg-slate-800 text-white">
+                    Request
                   </Button>
                 </div>
               </CardContent>
@@ -217,8 +231,8 @@ const Dashboard = () => {
 
         {filteredSkills.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No skills found matching your criteria.</p>
-            <p className="text-gray-400 mt-2">Try adjusting your search or filters.</p>
+            <p className="text-slate-500 text-lg">No skills found matching your criteria.</p>
+            <p className="text-slate-400 mt-2">Try adjusting your search or filters.</p>
           </div>
         )}
       </div>

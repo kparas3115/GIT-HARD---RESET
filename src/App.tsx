@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Messages from "./pages/Messages";
 import SkillDetails from "./pages/SkillDetails";
+import RequestSkill from "./pages/RequestSkill";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/requests" element={<RequestSkill />} />
           <Route path="/skill/:id" element={<SkillDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
