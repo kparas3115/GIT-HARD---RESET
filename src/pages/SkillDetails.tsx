@@ -49,7 +49,7 @@ const SkillDetails = () => {
       "Familiarity with npm/yarn",
       "Code editor (VS Code recommended)"
     ],
-    reviews: [
+    reviewsList: [
       {
         id: 1,
         student: "Mike Johnson",
@@ -198,7 +198,7 @@ const SkillDetails = () => {
 
               <TabsContent value="reviews">
                 <div className="space-y-4">
-                  {skill.reviews.map((review) => (
+                  {skill.reviewsList.map((review) => (
                     <Card key={review.id}>
                       <CardContent className="pt-6">
                         <div className="flex items-start space-x-3">
